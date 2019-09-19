@@ -1,3 +1,8 @@
+:root {
+  --session: hsla(90, 100%, 46%, 1);
+  --break: hsla(14, 92%, 54%, 1);
+}
+
 body {
   margin: 0;
 

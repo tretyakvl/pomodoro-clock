@@ -1,0 +1,34 @@
+.LengthControls {
+  color: var(--session);
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.LengthControls svg {
+  fill: var(--session);
+}
+
+.LengthControls--break {
+  color: var(--break);
+}
+
+.LengthControls--break svg {
+  fill: var(--break);
+}
+
+.LengthControls__controls {
+  display: flex;
+}
+
+.LengthControls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background-color: transparent;
+}
+
+.LengthControls button:nth-of-type(2) svg {
+  transform: rotate(180deg);
+}

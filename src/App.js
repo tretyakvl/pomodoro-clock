@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Progress from './components/Progress'
+import LengthControls from './components/LengthControls'
 import './App.css'
 
 class App extends Component {
@@ -7,7 +8,9 @@ class App extends Component {
     super(props)
     this.state = {
       outerProgress: 0,
-      innerProgress: 0
+      innerProgress: 0,
+      sessionDuration: 25,
+      breakDuration: 5
     }
   }
 
@@ -24,9 +27,15 @@ class App extends Component {
           outerProgress={this.state.outerProgress}
           innerProgress={this.state.innerProgress}
         />
-        <div>
-          <button onClick={() => this.progressOuter(5)}>inc</button>
-          <button>dec</button>
+        <div className='App__controls'>
+          <LengthControls
+            for='session'
+            duration={this.state.sessionDuration}
+          />
+          <LengthControls
+            for='break'
+            duration={this.state.breakDuration}
+          />
         </div>
       </div>
     )
