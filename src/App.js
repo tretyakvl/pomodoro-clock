@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Progress from './components/Progress'
+import Display from './components/Display'
 import LengthControls from './components/LengthControls'
+import StartButton from './components/StartButton'
 import './App.css'
 
 class App extends Component {
@@ -22,16 +24,20 @@ class App extends Component {
 
   render () {
     return (
-      <div className='clock'>
-        <Progress
-          outerProgress={this.state.outerProgress}
-          innerProgress={this.state.innerProgress}
-        />
+      <div className='App'>
+        <div className='App__clock'>
+          <Progress
+            outerProgress={this.state.outerProgress}
+            innerProgress={this.state.innerProgress}
+          />
+          <Display />
+        </div>
         <div className='App__controls'>
           <LengthControls
             for='session'
             duration={this.state.sessionDuration}
           />
+          <StartButton />
           <LengthControls
             for='break'
             duration={this.state.breakDuration}

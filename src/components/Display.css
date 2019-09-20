@@ -1,0 +1,17 @@
+.Display {
+  display: flex;
+  flex-direction: column;
+
+  color: var(--session);
+  font-weight: 700;
+}
+
+.Display__remaining {
+  font-size: 1.875em;
+}
+
+.Display__reset {
+  border: none;
+  background-color: transparent;
+  fill: hsla(228, 38%, 26%, 1);
+}
