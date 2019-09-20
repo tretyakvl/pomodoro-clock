@@ -14,6 +14,7 @@ class Progress extends Component {
         className='Progress'
         viewBox='0 0 250 250'
         width='250'
+        height='250'
       >
         <circle
           className='Progress__outer'

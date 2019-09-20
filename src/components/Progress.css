@@ -1,4 +1,6 @@
 .Progress {
+  width: 100%;
+  height: auto;
   transform: rotate(-90deg);
 }
 
