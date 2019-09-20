@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Progress from './components/Progress'
 import Display from './components/Display'
-import LengthControls from './components/LengthControls'
+import DurationControls from './components/DurationControls'
 import StartButton from './components/StartButton'
 import './App.css'
 
@@ -9,16 +9,32 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      outerProgress: 0,
-      innerProgress: 0,
-      sessionDuration: 25,
-      breakDuration: 5
+      progress: {
+        inner: 0,
+        outer: 0
+      },
+      duration: {
+        session: 25,
+        break: 5
+      }
     }
+    this.setDuration = this.setDuration.bind(this)
+    this.setProgress = this.setProgress.bind(this)
   }
 
-  progressOuter (progress) {
+  setDuration (duration, type) {
+    const durationCopy = Object.assign({}, this.state.duration)
+    durationCopy[type] = durationCopy[type] + duration
     this.setState({
-      outerProgress: this.state.outerProgress + progress
+      duration: durationCopy
+    })
+  }
+
+  setProgress (progress, type) {
+    const progressCopy = Object.assign({}, this.state.progress)
+    progressCopy[type] = progressCopy[type] + progress
+    this.setState({
+      progress: progressCopy
     })
   }
 
@@ -33,14 +49,16 @@ class App extends Component {
           <Display />
         </div>
         <div className='App__controls'>
-          <LengthControls
-            for='session'
-            duration={this.state.sessionDuration}
+          <DurationControls
+            id='session'
+            duration={this.state.duration.session}
+            onClick={this.setDuration}
           />
           <StartButton />
-          <LengthControls
-            for='break'
-            duration={this.state.breakDuration}
+          <DurationControls
+            id='break'
+            duration={this.state.duration.break}
+            onClick={this.setDuration}
           />
         </div>
       </div>

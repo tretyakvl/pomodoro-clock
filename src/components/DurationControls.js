@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import './LengthControls.css'
+import './DurationControls.css'
 
-class LengthControls extends Component {
+class DurationControls extends Component {
   render () {
-    const id = this.props.for
+    const { id, duration, onClick } = this.props
     const Arrow = () => {
       return (
         <svg width='9' height='14' viewBox='0 0 9 14' xmlns='http://www.w3.org/2000/svg'>
@@ -13,25 +13,27 @@ class LengthControls extends Component {
     }
     return (
       <div
-        className={`LengthControls LengthControls--${id}`}
+        className={`DurationControls DurationControls--${id}`}
       >
         <span
-          className='LengthControls__label'
+          className='DurationControls__label'
           id={`${id}-label`}
         >
           {`${id} length`}
         </span>
-        <div className='LengthControls__controls'>
+        <div className='DurationControls__controls'>
           <button
             id={`${id}-decrement`}
+            onClick={() => onClick(-1, id)}
           >
             <Arrow />
           </button>
           <span id={`${id}-length`}>
-            {this.props.duration}
+            {duration}
           </span>
           <button
             id={`${id}-decrement`}
+            onClick={() => onClick(1, id)}
           >
             <Arrow />
           </button>
@@ -41,4 +43,4 @@ class LengthControls extends Component {
   }
 }
 
-export default LengthControls
+export default DurationControls

@@ -1,26 +1,26 @@
-.LengthControls {
+.DurationControls {
   color: var(--session);
   font-size: 1em;
   font-weight: 700;
 }
 
-.LengthControls svg {
+.DurationControls svg {
   fill: var(--session);
 }
 
-.LengthControls--break {
+.DurationControls--break {
   color: var(--break);
 }
 
-.LengthControls--break svg {
+.DurationControls--break svg {
   fill: var(--break);
 }
 
-.LengthControls__controls {
+.DurationControls__controls {
   display: flex;
 }
 
-.LengthControls button {
+.DurationControls button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,6 +29,6 @@
   background-color: transparent;
 }
 
-.LengthControls button:nth-of-type(2) svg {
+.DurationControls button:nth-of-type(2) svg {
   transform: rotate(180deg);
 }
