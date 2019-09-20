@@ -10,19 +10,20 @@ class Display extends Component {
         </svg>
       )
     }
+    const { currentSession, timeLeft } = this.props
     return (
-      <div className='Display'>
+      <div className={`Display Display--${currentSession}`}>
         <span
           className='Display__current'
           id='timer-label'
         >
-          Session
+          {currentSession}
         </span>
         <span
           className='Display__remaining'
           id='time-left'
         >
-          25:00
+          {timeLeft}
         </span>
         <button
           className='Display__reset'

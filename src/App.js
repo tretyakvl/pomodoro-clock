@@ -16,6 +16,11 @@ class App extends Component {
       duration: {
         session: 25,
         break: 5
+      },
+      session: {
+        started: false,
+        name: 'session',
+        timeLeft: '25:00'
       }
     }
     this.setDuration = this.setDuration.bind(this)
@@ -46,7 +51,10 @@ class App extends Component {
             outerProgress={this.state.outerProgress}
             innerProgress={this.state.innerProgress}
           />
-          <Display />
+          <Display
+            timeLeft={this.state.session.timeLeft}
+            currentSession={this.state.session.name}
+          />
         </div>
         <div className='App__controls'>
           <DurationControls

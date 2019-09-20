@@ -16,6 +16,10 @@
   transform: translate(-50%, -50%);
 }
 
+.Display--break {
+  color: var(--break);
+}
+
 .Display__remaining {
   font-size: 1.875em;
 }
