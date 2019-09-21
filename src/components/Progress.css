@@ -4,7 +4,7 @@
   transform: rotate(-90deg);
 }
 
-.Progress__outer,
+/* .Progress__outer,
 .Progress__inner {
-  transition: stroke-dashoffset 100ms linear;
-}
+  transition: stroke-dashoffset 1000ms linear;
+} */

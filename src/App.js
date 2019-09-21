@@ -10,22 +10,22 @@ class App extends Component {
     super(props)
     this.state = {
       progress: {
-        inner: 0,
-        outer: 0
+        break: 0,
+        session: 0
       },
       duration: {
-        session: 25,
-        break: 5
+        session: 1,
+        break: 1
       },
       session: {
         started: false,
         name: 'session',
-        timeLeft: '25:00',
+        timeLeft: '01:00',
         intervalInstance: null
       }
     }
     this.setDuration = this.setDuration.bind(this)
-    this.setProgress = this.setProgress.bind(this)
+    this.progress = this.progress.bind(this)
   }
 
   setDuration (duration, type) {
@@ -36,9 +36,28 @@ class App extends Component {
     })
   }
 
-  setProgress (progress, type) {
+  changeSession () {
+    const sessionCopy = Object.assign({}, this.state.session)
+    const newName = sessionCopy.name === 'session' ? 'break' : 'session'
+    sessionCopy.name = newName
+    sessionCopy.timeLeft = `${this.state.duration[newName]}:00`
+    this.setState({
+      session: sessionCopy
+    })
+  }
+
+  progress () {
+    const currentSession = this.state.session.name
     const progressCopy = Object.assign({}, this.state.progress)
-    progressCopy[type] = progressCopy[type] + progress
+    const progress = 100 / (this.state.duration[currentSession] * 60)
+    let newProgress = progressCopy[currentSession] + progress
+
+    if (newProgress > 100) {
+      newProgress = 0
+      this.changeSession()
+    }
+
+    progressCopy[currentSession] = newProgress
     this.setState({
       progress: progressCopy
     })
@@ -59,7 +78,8 @@ class App extends Component {
     if (!isStarted) {
       sessionCopy.intervalInstance = setInterval(() => {
         this.updateClock()
-      }, 1000)
+        this.progress()
+      }, 100)
       sessionCopy.started = true
       this.setState({
         session: sessionCopy
@@ -79,8 +99,8 @@ class App extends Component {
       <div className='App'>
         <div className='App__clock'>
           <Progress
-            outerProgress={this.state.progress.outer}
-            innerProgress={this.state.progress.inner}
+            outerProgress={this.state.progress.session}
+            innerProgress={this.state.progress.break}
           />
           <Display
             timeLeft={this.state.session.timeLeft}
@@ -113,7 +133,6 @@ function countDonw (timeString) {
   dateObj.setMinutes(min)
   dateObj.setSeconds(sec - 1)
   const newTimeString = dateObj.toLocaleTimeString('ru-RU', {
-    hours: false,
     minutes: '2-digit',
     seconds: '2-digit'
   }).replace(/^\d+:/, '')
