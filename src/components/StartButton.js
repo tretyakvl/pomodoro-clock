@@ -14,6 +14,7 @@ class StartButton extends Component {
       <button
         className='StartButton'
         id='start__stop'
+        onClick={this.props.onClick}
       >
         <PlayIcon />
       </button>

@@ -20,7 +20,8 @@ class App extends Component {
       session: {
         started: false,
         name: 'session',
-        timeLeft: '25:00'
+        timeLeft: '25:00',
+        intervalInstance: null
       }
     }
     this.setDuration = this.setDuration.bind(this)
@@ -43,13 +44,43 @@ class App extends Component {
     })
   }
 
+  updateClock () {
+    const sessionCopy = Object.assign({}, this.state.session)
+    const timeLeft = sessionCopy.timeLeft
+    sessionCopy.timeLeft = countDonw(timeLeft)
+    this.setState({
+      session: sessionCopy
+    })
+  }
+
+  handleStartButton () {
+    const isStarted = this.state.session.started
+    const sessionCopy = Object.assign({}, this.state.session)
+    if (!isStarted) {
+      sessionCopy.intervalInstance = setInterval(() => {
+        this.updateClock()
+      }, 1000)
+      sessionCopy.started = true
+      this.setState({
+        session: sessionCopy
+      })
+    } else {
+      clearInterval(sessionCopy.intervalInstance)
+      sessionCopy.intervalInstance = null
+      sessionCopy.started = false
+      this.setState({
+        session: sessionCopy
+      })
+    }
+  }
+
   render () {
     return (
       <div className='App'>
         <div className='App__clock'>
           <Progress
-            outerProgress={this.state.outerProgress}
-            innerProgress={this.state.innerProgress}
+            outerProgress={this.state.progress.outer}
+            innerProgress={this.state.progress.inner}
           />
           <Display
             timeLeft={this.state.session.timeLeft}
@@ -62,7 +93,9 @@ class App extends Component {
             duration={this.state.duration.session}
             onClick={this.setDuration}
           />
-          <StartButton />
+          <StartButton
+            onClick={() => this.handleStartButton()}
+          />
           <DurationControls
             id='break'
             duration={this.state.duration.break}
@@ -72,6 +105,19 @@ class App extends Component {
       </div>
     )
   }
+}
+
+function countDonw (timeString) {
+  const dateObj = new Date(0)
+  const [min, sec] = timeString.split(':')
+  dateObj.setMinutes(min)
+  dateObj.setSeconds(sec - 1)
+  const newTimeString = dateObj.toLocaleTimeString('ru-RU', {
+    hours: false,
+    minutes: '2-digit',
+    seconds: '2-digit'
+  }).replace(/^\d+:/, '')
+  return newTimeString
 }
 
 export default App
