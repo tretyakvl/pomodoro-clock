@@ -32,7 +32,7 @@ class DurationControls extends Component {
             {duration}
           </span>
           <button
-            id={`${id}-decrement`}
+            id={`${id}-increment`}
             onClick={() => onClick(1, id)}
           >
             <Arrow />

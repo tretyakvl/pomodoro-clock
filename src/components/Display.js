@@ -28,6 +28,7 @@ class Display extends Component {
         <button
           className='Display__reset'
           id='reset'
+          onClick={this.props.onClick}
         >
           <ResetIcon />
         </button>

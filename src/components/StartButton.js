@@ -13,7 +13,7 @@ class StartButton extends Component {
     return (
       <button
         className='StartButton'
-        id='start__stop'
+        id='start_stop'
         onClick={this.props.onClick}
       >
         <PlayIcon />

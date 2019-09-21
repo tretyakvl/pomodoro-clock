@@ -14,13 +14,13 @@ class App extends Component {
         session: 0
       },
       duration: {
-        session: 1,
-        break: 1
+        session: 25,
+        break: 5
       },
       session: {
         started: false,
         name: 'session',
-        timeLeft: '01:00',
+        timeLeft: '25:00',
         intervalInstance: null
       }
     }
@@ -30,7 +30,8 @@ class App extends Component {
 
   setDuration (duration, type) {
     const durationCopy = Object.assign({}, this.state.duration)
-    durationCopy[type] = durationCopy[type] + duration
+    const newDuraiton = durationCopy[type] + duration
+    durationCopy[type] = newDuraiton < 1 ? 1 : newDuraiton
     this.setState({
       duration: durationCopy
     })
@@ -72,15 +73,34 @@ class App extends Component {
     })
   }
 
+  reset () {
+    clearInterval(this.state.session.intervalInstance)
+    this.setState({
+      session: {
+        started: false,
+        name: 'session',
+        timeLeft: '25:00',
+        intervalInstance: null
+      },
+      progress: {
+        break: 0,
+        session: 0
+      }
+    })
+  }
+
   handleStartButton () {
     const isStarted = this.state.session.started
     const sessionCopy = Object.assign({}, this.state.session)
     if (!isStarted) {
+      const duration = this.state.session.duration < 9
+        ? `0${this.state.duration.session}:00` : `${this.state.duration.session}:00`
       sessionCopy.intervalInstance = setInterval(() => {
         this.updateClock()
         this.progress()
-      }, 100)
+      }, 1000)
       sessionCopy.started = true
+      sessionCopy.timeLeft = duration
       this.setState({
         session: sessionCopy
       })
@@ -105,6 +125,7 @@ class App extends Component {
           <Display
             timeLeft={this.state.session.timeLeft}
             currentSession={this.state.session.name}
+            onClick={() => this.reset()}
           />
         </div>
         <div className='App__controls'>
