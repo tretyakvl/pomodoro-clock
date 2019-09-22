@@ -29,12 +29,25 @@ class App extends Component {
   }
 
   setDuration (duration, type) {
+    const MIN = 1
+    const MAX = 60
     const durationCopy = Object.assign({}, this.state.duration)
-    const newDuraiton = durationCopy[type] + duration
-    durationCopy[type] = newDuraiton < 1 ? 1 : newDuraiton
-    this.setState({
-      duration: durationCopy
-    })
+    let newDuration = durationCopy[type] + duration
+    if (newDuration < MIN) newDuration = MIN
+    else if (newDuration > MAX) newDuration = MAX
+    durationCopy[type] = newDuration
+    if (type === 'session') {
+      const sessionCopy = Object.assign({}, this.state.session)
+      sessionCopy.timeLeft = getTimeString(newDuration)
+      this.setState({
+        session: sessionCopy,
+        duration: durationCopy
+      })
+    } else {
+      this.setState({
+        duration: durationCopy
+      })
+    }
   }
 
   changeSession () {
@@ -158,6 +171,13 @@ function countDonw (timeString) {
     seconds: '2-digit'
   }).replace(/^\d+:/, '')
   return newTimeString
+}
+
+function getTimeString (num) {
+  if (num < 9) {
+    return `0${num}:00`
+  }
+  return `${num}:00`
 }
 
 export default App
