@@ -5,16 +5,19 @@ import DurationControls from './components/DurationControls'
 import StartButton from './components/StartButton'
 import './App.css'
 
+const defaultState = {
+  session: 25,
+  break: 5,
+  secondsPassed: 0,
+  isBreak: false
+}
+
 class App extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      session: 25,
-      break: 5,
-      secondsPassed: 0,
-      isBreak: false
-    }
+    this.state = defaultState
     this.setDuration = this.setDuration.bind(this)
+    this.handleResetButton = this.handleResetButton.bind(this)
   }
 
   render () {
@@ -37,7 +40,7 @@ class App extends Component {
           <Display
             timeLeft={timeLeft}
             currentSession={isBreak ? 'Break' : 'Session'}
-            onClick={() => this.reset()}
+            handleResetButton={this.handleResetButton}
           />
         </div>
         <div className='App__controls'>
@@ -106,20 +109,9 @@ class App extends Component {
     })
   }
 
-  reset () {
-    clearInterval(this.state.session.intervalInstance)
-    this.setState({
-      session: {
-        started: false,
-        name: 'session',
-        timeLeft: '25:00',
-        intervalInstance: null
-      },
-      progress: {
-        break: 0,
-        session: 0
-      }
-    })
+  handleResetButton () {
+    clearInterval(this.timer)
+    this.setState(defaultState)
   }
 
   handleStartButton () {
