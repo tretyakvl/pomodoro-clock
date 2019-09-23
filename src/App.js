@@ -5,27 +5,18 @@ import DurationControls from './components/DurationControls'
 import StartButton from './components/StartButton'
 import './App.css'
 
+const MINUTE = 60000
+const SECOND = 1000
+
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      progress: {
-        break: 0,
-        session: 0
-      },
-      duration: {
-        session: 25,
-        break: 5
-      },
-      session: {
-        started: false,
-        name: 'session',
-        timeLeft: '25:00',
-        intervalInstance: null
-      }
+      sessionDuration: 25 * MINUTE,
+      breakDuration: 5 * MINUTE,
+      timePassed: 0,
+      isBreak: false
     }
-    this.setDuration = this.setDuration.bind(this)
-    this.progress = this.progress.bind(this)
   }
 
   setDuration (duration, type) {
