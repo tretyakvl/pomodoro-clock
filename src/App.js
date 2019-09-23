@@ -5,39 +5,38 @@ import DurationControls from './components/DurationControls'
 import StartButton from './components/StartButton'
 import './App.css'
 
-const MINUTE = 60000
-const SECOND = 1000
-
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
       session: 25,
       break: 5,
-      timePassed: 0,
+      secondsPassed: 0,
       isBreak: false
     }
     this.setDuration = this.setDuration.bind(this)
   }
 
   render () {
-    const { timePassed, isBreak } = this.state
+    const { secondsPassed, isBreak } = this.state
     const sessionDuration = this.state.session
     const breakDuration = this.state.break
+    const currentSessionDuration = isBreak ? breakDuration : sessionDuration
+    const progress = secondsPassed * 100 / (currentSessionDuration * 60)
 
     return (
       <div className='App'>
-        {/* <div className='App__clock'>
+        <div className='App__clock'>
           <Progress
-            outerProgress={this.state.progress.session}
-            innerProgress={this.state.progress.break}
+            progress={progress}
+            isBreak={isBreak}
           />
           <Display
             timeLeft={this.state.session.timeLeft}
             currentSession={this.state.session.name}
             onClick={() => this.reset()}
           />
-        </div> */}
+        </div>
         <div className='App__controls'>
           <DurationControls
             id='session'

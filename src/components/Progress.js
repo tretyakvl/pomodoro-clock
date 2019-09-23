@@ -1,48 +1,50 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './Progress.css'
 
-class Progress extends Component {
-  render () {
-    const outerCircumference = 691
-    const innerCircumference = 490
-    const { innerProgress, outerProgress } = this.props
-    const outerOffset = getOffset(outerCircumference, outerProgress)
-    const innerOffset = getOffset(innerCircumference, innerProgress)
+const Progress = (props) => {
+  const OUTER_RADIUS = 110
+  const INNER_RADIUS = 78
+  const STROKE_WIDTH = 30
+  const outerCircumference = OUTER_RADIUS * 2 * Math.PI
+  const innerCircumference = INNER_RADIUS * 2 * Math.PI
+  const { progress, isBreak } = props
+  let offset
+  if (isBreak) offset = getOffset(innerCircumference, progress)
+  else offset = getOffset(outerCircumference, progress)
 
-    return (
-      <svg
-        className='Progress'
-        viewBox='0 0 250 250'
-        width='250'
-        height='250'
-      >
-        <circle
-          className='Progress__outer'
-          r='110'
-          cx='125'
-          cy='125'
-          fill='transparent'
-          stroke='#74E900'
-          strokeWidth='30'
-          strokeLinecap='round'
-          strokeDasharray={outerCircumference}
-          strokeDashoffset={outerOffset}
-        />
-        <circle
-          className='Progress__inner'
-          r='78'
-          cx='125'
-          cy='125'
-          fill='transparent'
-          stroke='#F6511D'
-          strokeWidth='30'
-          strokeLinecap='round'
-          strokeDasharray={innerCircumference}
-          strokeDashoffset={innerOffset}
-        />
-      </svg>
-    )
-  }
+  return (
+    <svg
+      className='Progress'
+      viewBox='0 0 250 250'
+      width='250'
+      height='250'
+    >
+      <circle
+        className='Progress__outer'
+        r={OUTER_RADIUS}
+        cx='125'
+        cy='125'
+        fill='transparent'
+        stroke='#74E900'
+        strokeWidth={STROKE_WIDTH}
+        strokeLinecap='round'
+        strokeDasharray={outerCircumference}
+        strokeDashoffset={isBreak ? 0 : offset}
+      />
+      <circle
+        className='Progress__inner'
+        r={INNER_RADIUS}
+        cx='125'
+        cy='125'
+        fill='transparent'
+        stroke='#F6511D'
+        strokeWidth={STROKE_WIDTH}
+        strokeLinecap='round'
+        strokeDasharray={innerCircumference}
+        strokeDashoffset={isBreak ? offset : 0}
+      />
+    </svg>
+  )
 }
 
 function getOffset (circumference, progress) {
