@@ -12,33 +12,60 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      sessionDuration: 25 * MINUTE,
-      breakDuration: 5 * MINUTE,
+      session: 25,
+      break: 5,
       timePassed: 0,
       isBreak: false
     }
+    this.setDuration = this.setDuration.bind(this)
   }
 
-  setDuration (duration, type) {
+  render () {
+    const { timePassed, isBreak } = this.state
+    const sessionDuration = this.state.session
+    const breakDuration = this.state.break
+
+    return (
+      <div className='App'>
+        {/* <div className='App__clock'>
+          <Progress
+            outerProgress={this.state.progress.session}
+            innerProgress={this.state.progress.break}
+          />
+          <Display
+            timeLeft={this.state.session.timeLeft}
+            currentSession={this.state.session.name}
+            onClick={() => this.reset()}
+          />
+        </div> */}
+        <div className='App__controls'>
+          <DurationControls
+            id='session'
+            duration={sessionDuration}
+            onClick={this.setDuration}
+          />
+          {/* <StartButton
+            onClick={() => this.handleStartButton()}
+          /> */}
+          <DurationControls
+            id='break'
+            duration={breakDuration}
+            onClick={this.setDuration}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  setDuration (duration, id) {
     const MIN = 1
     const MAX = 60
-    const durationCopy = Object.assign({}, this.state.duration)
-    let newDuration = durationCopy[type] + duration
+
+    let newDuration = this.state[id] + duration
     if (newDuration < MIN) newDuration = MIN
     else if (newDuration > MAX) newDuration = MAX
-    durationCopy[type] = newDuration
-    if (type === 'session') {
-      const sessionCopy = Object.assign({}, this.state.session)
-      sessionCopy.timeLeft = getTimeString(newDuration)
-      this.setState({
-        session: sessionCopy,
-        duration: durationCopy
-      })
-    } else {
-      this.setState({
-        duration: durationCopy
-      })
-    }
+
+    this.setState({ [id]: newDuration })
   }
 
   changeSession () {
@@ -116,39 +143,6 @@ class App extends Component {
         session: sessionCopy
       })
     }
-  }
-
-  render () {
-    return (
-      <div className='App'>
-        <div className='App__clock'>
-          <Progress
-            outerProgress={this.state.progress.session}
-            innerProgress={this.state.progress.break}
-          />
-          <Display
-            timeLeft={this.state.session.timeLeft}
-            currentSession={this.state.session.name}
-            onClick={() => this.reset()}
-          />
-        </div>
-        <div className='App__controls'>
-          <DurationControls
-            id='session'
-            duration={this.state.duration.session}
-            onClick={this.setDuration}
-          />
-          <StartButton
-            onClick={() => this.handleStartButton()}
-          />
-          <DurationControls
-            id='break'
-            duration={this.state.duration.break}
-            onClick={this.setDuration}
-          />
-        </div>
-      </div>
-    )
   }
 }
 
