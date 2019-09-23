@@ -23,6 +23,9 @@ class App extends Component {
     const breakDuration = this.state.break
     const currentSessionDuration = isBreak ? breakDuration : sessionDuration
     const progress = secondsPassed * 100 / (currentSessionDuration * 60)
+    const timeLeft = getTimeLeft(
+      isBreak ? breakDuration : sessionDuration, secondsPassed
+    )
 
     return (
       <div className='App'>
@@ -32,8 +35,8 @@ class App extends Component {
             isBreak={isBreak}
           />
           <Display
-            timeLeft={this.state.session.timeLeft}
-            currentSession={this.state.session.name}
+            timeLeft={timeLeft}
+            currentSession={isBreak ? 'Break' : 'Session'}
             onClick={() => this.reset()}
           />
         </div>
@@ -143,6 +146,12 @@ class App extends Component {
       })
     }
   }
+}
+
+function getTimeLeft (sessionDuration, secondsPassed) {
+  const msPassed = sessionDuration * 60000 - secondsPassed * 1000
+  const regex = /\d+:\d+(?=\s)/
+  return new Date(msPassed).toTimeString().match(regex)[0]
 }
 
 function countDonw (timeString) {
