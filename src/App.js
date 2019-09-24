@@ -34,7 +34,6 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <button onClick={this.handleResetButton}>reset</button>
         <div className='App__clock'>
           <Progress
             progress={progress}
@@ -95,12 +94,13 @@ class App extends Component {
 
   handleResetButton () {
     clearInterval(this.timer)
+    delete this.timer
     this.setState(defaultState)
   }
 
   handleStartButton () {
     if (!this.timer) {
-      this.timer = setInterval(this.tick, 100)
+      this.timer = setInterval(this.tick, 50)
     } else {
       clearInterval(this.timer)
       delete this.timer

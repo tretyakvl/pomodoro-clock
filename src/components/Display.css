@@ -29,3 +29,7 @@
   background-color: transparent;
   fill: hsla(228, 38%, 26%, 1);
 }
+
+.Display__reset svg {
+  pointer-events: none;
+}

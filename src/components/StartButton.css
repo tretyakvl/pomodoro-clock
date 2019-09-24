@@ -3,3 +3,7 @@
   background-color: transparent;
   fill: hsla(228, 42%, 47%, 1);
 }
+
+.StartButton svg {
+  pointer-events: none;
+}
