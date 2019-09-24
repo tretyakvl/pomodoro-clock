@@ -115,6 +115,10 @@ class App extends Component {
 }
 
 function getTimeLeft (sessionDuration, secondsPassed) {
+  if (sessionDuration === 60 & secondsPassed === 0) {
+    return '60:00'
+  }
+
   const msPassed = sessionDuration * 60000 - secondsPassed * 1000
   const regex = /\d+:\d+(?=\s)/
   return new Date(msPassed).toTimeString().match(regex)[0]
