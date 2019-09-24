@@ -3,6 +3,7 @@ import Progress from './components/Progress'
 import Display from './components/Display'
 import DurationControls from './components/DurationControls'
 import StartButton from './components/StartButton'
+import Alert from './components/Alert'
 import './App.css'
 
 const defaultState = {
@@ -16,6 +17,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = defaultState
+    this.AlertRef = React.createRef()
     this.setDuration = this.setDuration.bind(this)
     this.tick = this.tick.bind(this)
     this.handleResetButton = this.handleResetButton.bind(this)
@@ -34,6 +36,7 @@ class App extends Component {
 
     return (
       <div className='App'>
+        <Alert ref={this.AlertRef} />
         <div className='App__clock'>
           <Progress
             progress={progress}
@@ -81,6 +84,7 @@ class App extends Component {
     const minutesPassed = (secondsPassed + 1) / 60
 
     if (minutesPassed > currentSessionDuration) {
+      this.AlertRef.current.play()
       this.setState({
         secondsPassed: 0,
         isBreak: !isBreak
@@ -96,11 +100,13 @@ class App extends Component {
     clearInterval(this.timer)
     delete this.timer
     this.setState(defaultState)
+    this.AlertRef.current.pause()
+    this.AlertRef.current.currentTime = 0
   }
 
   handleStartButton () {
     if (!this.timer) {
-      this.timer = setInterval(this.tick, 1000)
+      this.timer = setInterval(this.tick, 10)
     } else {
       clearInterval(this.timer)
       delete this.timer
