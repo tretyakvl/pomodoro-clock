@@ -6,8 +6,8 @@ import StartButton from './components/StartButton'
 import './App.css'
 
 const defaultState = {
-  session: 1,
-  break: 1,
+  session: 25,
+  break: 5,
   secondsPassed: 0,
   isBreak: false
 }
@@ -80,7 +80,7 @@ class App extends Component {
     const currentSessionDuration = isBreak ? this.state.break : this.state.session
     const minutesPassed = (secondsPassed + 1) / 60
 
-    if (minutesPassed >= currentSessionDuration) {
+    if (minutesPassed > currentSessionDuration) {
       this.setState({
         secondsPassed: 0,
         isBreak: !isBreak
@@ -100,7 +100,7 @@ class App extends Component {
 
   handleStartButton () {
     if (!this.timer) {
-      this.timer = setInterval(this.tick, 50)
+      this.timer = setInterval(this.tick, 1000)
     } else {
       clearInterval(this.timer)
       delete this.timer
