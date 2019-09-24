@@ -106,7 +106,7 @@ class App extends Component {
 
   handleStartButton () {
     if (!this.timer) {
-      this.timer = setInterval(this.tick, 10)
+      this.timer = setInterval(this.tick, 1000)
     } else {
       clearInterval(this.timer)
       delete this.timer
