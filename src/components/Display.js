@@ -11,7 +11,7 @@ const Display = (props) => {
     )
   }
   return (
-    <div className={`Display Display--${currentSession}`}>
+    <div className={`Display Display--${currentSession.toLowerCase()}`}>
       <span
         className='Display__current'
         id='timer-label'

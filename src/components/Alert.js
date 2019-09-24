@@ -7,7 +7,8 @@ const Alert = React.forwardRef((props, ref) => {
     <audio
       id='beep'
       ref={ref}
-      src={sound}>
+      src={sound}
+    >
         Your browser does not support the
       <code>audio</code> element.
     </audio>
