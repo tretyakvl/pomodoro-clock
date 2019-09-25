@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import Progress from './components/Progress'
-import Display from './components/Display'
-import DurationControls from './components/DurationControls'
 import StartButton from './components/StartButton'
 import Alert from './components/Alert'
 import './App.css'
+import Clock from './components/Clock'
 
 const defaultState = {
   session: 25,
@@ -37,30 +35,15 @@ class App extends Component {
     return (
       <div className='App'>
         <Alert ref={this.AlertRef} />
-        <div className='App__clock'>
-          <Progress
-            progress={progress}
-            isBreak={isBreak}
-          />
-          <Display
-            timeLeft={timeLeft}
-            currentSession={isBreak ? 'Break' : 'Session'}
-            handleResetButton={this.handleResetButton}
-          />
-        </div>
+        <Clock
+          progress={progress}
+          isBreak={isBreak}
+          timeLeft={timeLeft}
+          handleResetButton={this.handleResetButton}
+        />
         <div className='App__controls'>
-          <DurationControls
-            id='session'
-            duration={sessionDuration}
-            onClick={this.setDuration}
-          />
           <StartButton
             onClick={this.handleStartButton}
-          />
-          <DurationControls
-            id='break'
-            duration={breakDuration}
-            onClick={this.setDuration}
           />
         </div>
       </div>
