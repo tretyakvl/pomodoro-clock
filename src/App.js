@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
-import Progress from './components/Progress'
-import Display from './components/Display'
-import DurationControls from './components/DurationControls'
 import StartButton from './components/StartButton'
 import Alert from './components/Alert'
 import './App.css'
+import Clock from './components/Clock'
 
 const defaultState = {
   session: 25,
   break: 5,
   secondsPassed: 0,
   isBreak: false,
+<<<<<<< HEAD
   controlsShown: null
+=======
+  controlsShown: false
+>>>>>>> b8e39189fa50525c018bcb38fa394c78e27279b9
 }
 
 class App extends Component {
@@ -26,9 +28,15 @@ class App extends Component {
     this.handleStartButton = this.handleStartButton.bind(this)
   }
 
+<<<<<<< HEAD
   showControls (type) {
     this.setState({
       controlsShown: type
+=======
+  showControls () {
+    this.setState({
+      controlsShown: true
+>>>>>>> b8e39189fa50525c018bcb38fa394c78e27279b9
     })
   }
 
@@ -45,6 +53,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Alert ref={this.AlertRef} />
+<<<<<<< HEAD
         <div className='App__clock'>
           <Progress
             progress={progress}
@@ -62,6 +71,16 @@ class App extends Component {
             onClick={this.setDuration}
           />}
         </div>
+=======
+        <Clock
+          progress={progress}
+          isBreak={isBreak}
+          timeLeft={timeLeft}
+          handleResetButton={this.handleResetButton}
+          showControls={this.showControls}
+          controlsShown={controlsShown}
+        />
+>>>>>>> b8e39189fa50525c018bcb38fa394c78e27279b9
         <div className='App__controls'>
           <StartButton
             onClick={this.handleStartButton}

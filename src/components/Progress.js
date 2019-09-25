@@ -21,7 +21,11 @@ const Progress = (props) => {
     >
       <circle
         className='Progress__outer'
+<<<<<<< HEAD
         onClick={() => { showControls('session') }}
+=======
+        onClick={showControls}
+>>>>>>> b8e39189fa50525c018bcb38fa394c78e27279b9
         r={OUTER_RADIUS}
         cx='125'
         cy='125'
@@ -35,6 +39,7 @@ const Progress = (props) => {
       <circle
         onClick={() => { showControls('break') }}
         className='Progress__inner'
+        onClick={showControls}
         r={INNER_RADIUS}
         cx='125'
         cy='125'
