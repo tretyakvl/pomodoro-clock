@@ -10,7 +10,8 @@ const defaultState = {
   session: 25,
   break: 5,
   secondsPassed: 0,
-  isBreak: false
+  isBreak: false,
+  controlsShown: null
 }
 
 class App extends Component {
@@ -19,13 +20,20 @@ class App extends Component {
     this.state = defaultState
     this.AlertRef = React.createRef()
     this.setDuration = this.setDuration.bind(this)
+    this.showControls = this.showControls.bind(this)
     this.tick = this.tick.bind(this)
     this.handleResetButton = this.handleResetButton.bind(this)
     this.handleStartButton = this.handleStartButton.bind(this)
   }
 
+  showControls (type) {
+    this.setState({
+      controlsShown: type
+    })
+  }
+
   render () {
-    const { secondsPassed, isBreak } = this.state
+    const { secondsPassed, isBreak, controlsShown } = this.state
     const sessionDuration = this.state.session
     const breakDuration = this.state.break
     const currentSessionDuration = isBreak ? breakDuration : sessionDuration
@@ -41,26 +49,22 @@ class App extends Component {
           <Progress
             progress={progress}
             isBreak={isBreak}
+            showControls={this.showControls}
           />
           <Display
             timeLeft={timeLeft}
             currentSession={isBreak ? 'Break' : 'Session'}
             handleResetButton={this.handleResetButton}
           />
+          {controlsShown && <DurationControls
+            id={controlsShown}
+            duration={this.state[controlsShown]}
+            onClick={this.setDuration}
+          />}
         </div>
         <div className='App__controls'>
-          <DurationControls
-            id='session'
-            duration={sessionDuration}
-            onClick={this.setDuration}
-          />
           <StartButton
             onClick={this.handleStartButton}
-          />
-          <DurationControls
-            id='break'
-            duration={breakDuration}
-            onClick={this.setDuration}
           />
         </div>
       </div>

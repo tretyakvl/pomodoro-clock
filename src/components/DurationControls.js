@@ -2,7 +2,7 @@ import React from 'react'
 import './DurationControls.css'
 
 const DurationControls = (props) => {
-  const { id, duration, onClick } = props
+  const { id, duration, onClick, controlsShown } = props
   const Arrow = () => {
     return (
       <svg width='9' height='14' viewBox='0 0 9 14' xmlns='http://www.w3.org/2000/svg'>
@@ -10,6 +10,7 @@ const DurationControls = (props) => {
       </svg>
     )
   }
+
   return (
     <div
       className={`DurationControls DurationControls--${id}`}
