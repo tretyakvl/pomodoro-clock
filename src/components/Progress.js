@@ -7,7 +7,7 @@ const Progress = (props) => {
   const STROKE_WIDTH = 30
   const outerCircumference = OUTER_RADIUS * 2 * Math.PI
   const innerCircumference = INNER_RADIUS * 2 * Math.PI
-  const { progress, isBreak } = props
+  const { progress, isBreak, showControls } = props
   let offset
   if (isBreak) offset = getOffset(innerCircumference, progress)
   else offset = getOffset(outerCircumference, progress)
@@ -21,6 +21,7 @@ const Progress = (props) => {
     >
       <circle
         className='Progress__outer'
+        onClick={showControls}
         r={OUTER_RADIUS}
         cx='125'
         cy='125'
@@ -33,6 +34,7 @@ const Progress = (props) => {
       />
       <circle
         className='Progress__inner'
+        onClick={showControls}
         r={INNER_RADIUS}
         cx='125'
         cy='125'
