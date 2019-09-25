@@ -21,6 +21,7 @@ class App extends Component {
     this.AlertRef = React.createRef()
     this.setDuration = this.setDuration.bind(this)
     this.showControls = this.showControls.bind(this)
+    this.closeControls = this.closeControls.bind(this)
     this.tick = this.tick.bind(this)
     this.handleResetButton = this.handleResetButton.bind(this)
     this.handleStartButton = this.handleStartButton.bind(this)
@@ -32,15 +33,34 @@ class App extends Component {
     })
   }
 
+  closeControls () {
+    this.setState({
+      controlsShown: null
+    })
+  }
+
   render () {
     const { secondsPassed, isBreak, controlsShown } = this.state
     const sessionDuration = this.state.session
     const breakDuration = this.state.break
     const currentSessionDuration = isBreak ? breakDuration : sessionDuration
     const progress = secondsPassed * 100 / (currentSessionDuration * 60)
-    const timeLeft = getTimeLeft(
-      isBreak ? breakDuration : sessionDuration, secondsPassed
-    )
+
+    let timeLeft
+    let startButtonHandler
+    let currentSession
+
+    if (controlsShown) {
+      timeLeft = getTimeLeft(this.state[controlsShown], 0)
+      startButtonHandler = this.closeControls
+      currentSession = controlsShown
+    } else {
+      timeLeft = getTimeLeft(
+        isBreak ? breakDuration : sessionDuration, secondsPassed
+      )
+      startButtonHandler = this.handleStartButton
+      currentSession = isBreak ? 'Break' : 'Session'
+    }
 
     return (
       <div className='App'>
@@ -53,7 +73,7 @@ class App extends Component {
           />
           <Display
             timeLeft={timeLeft}
-            currentSession={isBreak ? 'Break' : 'Session'}
+            currentSession={currentSession}
             handleResetButton={this.handleResetButton}
           />
           {controlsShown && <DurationControls
@@ -64,7 +84,7 @@ class App extends Component {
         </div>
         <div className='App__controls'>
           <StartButton
-            onClick={this.handleStartButton}
+            onClick={startButtonHandler}
           />
         </div>
       </div>
