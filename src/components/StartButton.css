@@ -1,7 +1,14 @@
 .StartButton {
+  position: absolute;
+  right: 50%;
+  bottom: 2.5em;
+
+  padding: 0;
+
   border: none;
   background-color: transparent;
   fill: hsla(228, 42%, 47%, 1);
+  transform: translateX(50%);
 }
 
 .StartButton svg {

@@ -6,14 +6,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 
-  height: 7em;
+  width: 11em;
+  height: 11em;
+  padding-top: 2em;
 
   color: var(--session);
   font-weight: 700;
   text-align: center;
 
   transform: translate(-50%, -50%);
+  transition: color 200ms ease-out;
+  clip-path: circle(50%);
 }
 
 .Display--break {

@@ -1,7 +1,14 @@
 .DurationControls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
   color: var(--session);
   font-size: 1em;
   font-weight: 700;
+  pointer-events: none;
 }
 
 .DurationControls svg {
@@ -21,12 +28,23 @@
 }
 
 .DurationControls button {
+  position: absolute;
+  top: 50%;
+  left: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
   border: none;
   background-color: transparent;
+  transform: translateY(-50%);
+  pointer-events: initial;
+}
+
+.DurationControls button:nth-of-type(2) {
+  left: unset;
+  right: 0;
 }
 
 .DurationControls button:nth-of-type(2) svg {

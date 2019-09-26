@@ -2,7 +2,8 @@ import React from 'react'
 import './DurationControls.css'
 
 const DurationControls = (props) => {
-  const { id, duration, onClick, controlsShown } = props
+  let { id, onClick } = props
+  id = id.split(' ')[0].toLowerCase()
   const Arrow = () => {
     return (
       <svg width='9' height='14' viewBox='0 0 9 14' xmlns='http://www.w3.org/2000/svg'>
@@ -15,12 +16,6 @@ const DurationControls = (props) => {
     <div
       className={`DurationControls DurationControls--${id}`}
     >
-      <span
-        className='DurationControls__label'
-        id={`${id}-label`}
-      >
-        {`${id} length`}
-      </span>
       <div className='DurationControls__controls'>
         <button
           id={`${id}-decrement`}
@@ -28,9 +23,6 @@ const DurationControls = (props) => {
         >
           <Arrow />
         </button>
-        <span id={`${id}-length`}>
-          {duration}
-        </span>
         <button
           id={`${id}-increment`}
           onClick={() => onClick(1, id)}

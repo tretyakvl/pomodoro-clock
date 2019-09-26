@@ -53,7 +53,7 @@ class App extends Component {
     if (controlsShown) {
       timeLeft = getTimeLeft(this.state[controlsShown], 0)
       startButtonHandler = this.closeControls
-      currentSession = controlsShown
+      currentSession = `${capitalize(controlsShown)} duration`
     } else {
       timeLeft = getTimeLeft(
         isBreak ? breakDuration : sessionDuration, secondsPassed
@@ -76,16 +76,13 @@ class App extends Component {
             currentSession={currentSession}
             handleResetButton={this.handleResetButton}
           />
-          {controlsShown && <DurationControls
-            id={controlsShown}
-            duration={this.state[controlsShown]}
-            onClick={this.setDuration}
-          />}
-        </div>
-        <div className='App__controls'>
           <StartButton
             onClick={startButtonHandler}
           />
+          {controlsShown && <DurationControls
+            id={controlsShown}
+            onClick={this.setDuration}
+          />}
         </div>
       </div>
     )
@@ -146,6 +143,10 @@ function getTimeLeft (sessionDuration, secondsPassed) {
   const msPassed = sessionDuration * 60000 - secondsPassed * 1000
   const regex = /\d+:\d+(?=\s)/
   return new Date(msPassed).toTimeString().match(regex)[0]
+}
+
+function capitalize (string) {
+  return string.replace(/^\w{1}/, match => match.toUpperCase())
 }
 
 export default App

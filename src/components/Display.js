@@ -10,8 +10,10 @@ const Display = (props) => {
       </svg>
     )
   }
+  const sessionId = currentSession.split(' ')[0].toLowerCase()
+
   return (
-    <div className={`Display Display--${currentSession.toLowerCase()}`}>
+    <div className={`Display Display--${sessionId}`}>
       <span
         className='Display__current'
         id='timer-label'

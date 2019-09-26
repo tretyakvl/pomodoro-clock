@@ -3,8 +3,8 @@ import './Progress.css'
 
 const Progress = (props) => {
   const OUTER_RADIUS = 110
-  const INNER_RADIUS = 78
-  const STROKE_WIDTH = 30
+  const INNER_RADIUS = 84
+  const STROKE_WIDTH = 25
   const outerCircumference = OUTER_RADIUS * 2 * Math.PI
   const innerCircumference = INNER_RADIUS * 2 * Math.PI
   const { progress, isBreak, showControls } = props

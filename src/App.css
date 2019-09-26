@@ -1,15 +1,11 @@
 .App {
-  max-width: 20em;
   margin: 0 auto;
 }
 
 .App__clock {
-  margin-bottom: 1em;
   position: relative;
-}
 
-.App__controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 22.5em;
+  height: 22.5em;
+  padding: 1.5em;
 }
