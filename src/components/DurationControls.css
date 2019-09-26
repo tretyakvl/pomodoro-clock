@@ -8,45 +8,44 @@
   color: var(--session);
   font-size: 1em;
   font-weight: 700;
+
   pointer-events: none;
+  fill: var(--session);
+  transition: fill 200ms ease-out;
 }
 
 .DurationControls svg {
-  fill: var(--session);
+  width: 25%;
+  height: auto;
+  filter: drop-shadow(1px 2px 1px hsla(0, 0%, 0%, 0.5));
 }
 
 .DurationControls--break {
-  color: var(--break);
-}
-
-.DurationControls--break svg {
   fill: var(--break);
 }
 
-.DurationControls__controls {
-  display: flex;
-}
-
-.DurationControls button {
+.DurationControls__button {
   position: absolute;
   top: 50%;
-  left: 0;
+  left: 1em;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: none;
-  background-color: transparent;
+  width: 4.5em;
+  height: 4.5em;
+  padding: 0;
+
   transform: translateY(-50%);
   pointer-events: initial;
 }
 
-.DurationControls button:nth-of-type(2) {
+.DurationControls__button:nth-of-type(2) {
   left: unset;
-  right: 0;
+  right: 1em;
 }
 
-.DurationControls button:nth-of-type(2) svg {
-  transform: rotate(180deg);
+.DurationControls__button:nth-of-type(2) svg {
+  transform: rotateY(180deg);
 }

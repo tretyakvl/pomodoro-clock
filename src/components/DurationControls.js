@@ -16,20 +16,20 @@ const DurationControls = (props) => {
     <div
       className={`DurationControls DurationControls--${id}`}
     >
-      <div className='DurationControls__controls'>
-        <button
-          id={`${id}-decrement`}
-          onClick={() => onClick(-1, id)}
-        >
-          <Arrow />
-        </button>
-        <button
-          id={`${id}-increment`}
-          onClick={() => onClick(1, id)}
-        >
-          <Arrow />
-        </button>
-      </div>
+      <button
+        className='App__button DurationControls__button'
+        id={`${id}-decrement`}
+        onClick={() => onClick(-1, id)}
+      >
+        <Arrow />
+      </button>
+      <button
+        className='App__button DurationControls__button'
+        id={`${id}-increment`}
+        onClick={() => onClick(1, id)}
+      >
+        <Arrow />
+      </button>
     </div>
   )
 }

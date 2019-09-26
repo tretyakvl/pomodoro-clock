@@ -12,7 +12,7 @@ const StartButton = (props) => {
 
   return (
     <button
-      className='StartButton'
+      className='StartButton App__button'
       id='start_stop'
       onClick={props.onClick}
     >
