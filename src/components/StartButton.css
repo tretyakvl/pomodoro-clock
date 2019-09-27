@@ -9,8 +9,7 @@
 
   width: 5em;
   height: 5em;
-  padding-right: 0;
-  padding-left: 0.6em;
+  padding: 0;
 
   transform: translateX(50%);
   fill: hsla(228, 42%, 47%, 1);

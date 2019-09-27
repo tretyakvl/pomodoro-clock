@@ -10,6 +10,7 @@ const defaultState = {
   session: 25,
   break: 5,
   secondsPassed: 0,
+  isStarted: false,
   isBreak: false,
   controlsShown: null
 }
@@ -27,20 +28,8 @@ class App extends Component {
     this.handleStartButton = this.handleStartButton.bind(this)
   }
 
-  showControls (type) {
-    this.setState({
-      controlsShown: type
-    })
-  }
-
-  closeControls () {
-    this.setState({
-      controlsShown: null
-    })
-  }
-
   render () {
-    const { secondsPassed, isBreak, controlsShown } = this.state
+    const { secondsPassed, isBreak, isStarted, controlsShown } = this.state
     const sessionDuration = this.state.session
     const breakDuration = this.state.break
     const currentSessionDuration = isBreak ? breakDuration : sessionDuration
@@ -77,6 +66,8 @@ class App extends Component {
             handleResetButton={this.handleResetButton}
           />
           <StartButton
+            isStarted={isStarted}
+            controlsShown={controlsShown}
             onClick={startButtonHandler}
           />
           {controlsShown && <DurationControls
@@ -86,6 +77,18 @@ class App extends Component {
         </div>
       </div>
     )
+  }
+
+  showControls (type) {
+    this.setState({
+      controlsShown: type
+    })
+  }
+
+  closeControls () {
+    this.setState({
+      controlsShown: null
+    })
   }
 
   setDuration (duration, id) {
@@ -127,8 +130,10 @@ class App extends Component {
 
   handleStartButton () {
     if (!this.timer) {
+      this.setState({ isStarted: true })
       this.timer = setInterval(this.tick, 1000)
     } else {
+      this.setState({ isStarted: false })
       clearInterval(this.timer)
       delete this.timer
     }
