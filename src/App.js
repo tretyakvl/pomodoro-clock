@@ -7,8 +7,8 @@ import DurationControls from './components/DurationControls'
 import './App.css'
 
 const defaultState = {
-  session: 25,
-  break: 5,
+  session: 1,
+  break: 1,
   secondsPassed: 0,
   isStarted: false,
   isBreak: false,
@@ -58,6 +58,7 @@ class App extends Component {
           <Progress
             progress={progress}
             isBreak={isBreak}
+            secondsPassed={secondsPassed}
             showControls={this.showControls}
           />
           <Display
@@ -75,6 +76,9 @@ class App extends Component {
             onClick={this.setDuration}
           />}
         </div>
+        <span className='App__info'>
+            Tap on circles to set duration
+        </span>
       </div>
     )
   }

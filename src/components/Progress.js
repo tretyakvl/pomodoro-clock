@@ -7,7 +7,7 @@ const Progress = (props) => {
   const STROKE_WIDTH = 25
   const outerCircumference = OUTER_RADIUS * 2 * Math.PI
   const innerCircumference = INNER_RADIUS * 2 * Math.PI
-  const { progress, isBreak, showControls } = props
+  const { progress, isBreak, showControls, secondsPassed } = props
   let offset
   if (isBreak) offset = getOffset(innerCircumference, progress)
   else offset = getOffset(outerCircumference, progress)
@@ -21,7 +21,10 @@ const Progress = (props) => {
     >
       <circle
         className='Progress__outer'
-        onClick={() => { showControls('session') }}
+        onClick={() => {
+          if (secondsPassed) return null
+          showControls('session')
+        }}
         r={OUTER_RADIUS}
         cx='125'
         cy='125'
@@ -33,7 +36,10 @@ const Progress = (props) => {
         strokeDashoffset={isBreak ? 0 : offset}
       />
       <circle
-        onClick={() => { showControls('break') }}
+        onClick={() => {
+          if (secondsPassed) return null
+          showControls('break')
+        }}
         className='Progress__inner'
         r={INNER_RADIUS}
         cx='125'
