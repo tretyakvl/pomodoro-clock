@@ -17,14 +17,14 @@ const DurationControls = (props) => {
       className={`DurationControls DurationControls--${id}`}
     >
       <button
-        className='App__button DurationControls__button'
+        className='App__button DurationControls__button bounceIn'
         id={`${id}-decrement`}
         onClick={() => onClick(-1, id)}
       >
         <Arrow />
       </button>
       <button
-        className='App__button DurationControls__button'
+        className='App__button DurationControls__button bounceIn'
         id={`${id}-increment`}
         onClick={() => onClick(1, id)}
       >

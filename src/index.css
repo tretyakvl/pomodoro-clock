@@ -19,3 +19,63 @@ body {
 *, ::before, ::after {
   box-sizing: inherit;
 }
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0.1;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  35% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(0.93, 0.93, 0.93);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.bounceIn {
+  animation-duration: 0.50s;
+  animation-name: bounceIn;
+  animation-timing-function: ease-out;
+}
+
+@keyframes bounceOut {
+  0% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+
+  35% {
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+
+  60% {
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  to {
+    opacity: 0.1;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+}
+
+.bounceOut {
+  animation-duration: 0.40s;
+  animation-name: bounceOut;
+  animation-timing-function: ease-out;
+}
